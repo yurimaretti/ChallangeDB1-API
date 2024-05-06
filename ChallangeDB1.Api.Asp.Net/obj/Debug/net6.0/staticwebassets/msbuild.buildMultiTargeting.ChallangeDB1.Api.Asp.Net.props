@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ChallangeDB1.Api.Asp.Net.props" />
+</Project>
