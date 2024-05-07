@@ -1,6 +1,6 @@
 ﻿using ChallangeDB1.Api.Asp.Net.Models;
-using ChallangeDB1.Api.Asp.Net.Repository;
 using ChallangeDB1.Api.Asp.Net.Repository.Context;
+using ChallangeDB1.Api.Asp.Net.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,21 +8,21 @@ namespace ChallangeDB1.Api.Asp.Net.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AprendizController : ControllerBase
+    public class MentorController : ControllerBase
     {
-        private readonly AprendizRepository aprendizRepository;
+        private readonly MentorRepository mentorRepository;
 
-        public AprendizController(DataBaseContext context)
+        public MentorController(DataBaseContext context)
         {
-            aprendizRepository = new AprendizRepository(context);
+            mentorRepository = new MentorRepository(context);
         }
 
         [HttpGet]
-        public ActionResult<List<AprendizModel>> Get()
+        public ActionResult<List<MentorModel>> Get()
         {
             try
             {
-                var lista = aprendizRepository.Listar();
+                var lista = mentorRepository.Listar();
 
                 if (lista != null)
                 {
@@ -40,15 +40,15 @@ namespace ChallangeDB1.Api.Asp.Net.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<AprendizModel> Get([FromRoute] string id)
+        public ActionResult<MentorModel> Get([FromRoute] string id)
         {
             try
             {
-                var aprendizModel = aprendizRepository.Buscar(id);
+                var mentorModel = mentorRepository.Buscar(id);
 
-                if (aprendizModel != null)
+                if (mentorModel != null)
                 {
-                    return Ok(aprendizModel);
+                    return Ok(mentorModel);
                 }
                 else
                 {
@@ -62,7 +62,7 @@ namespace ChallangeDB1.Api.Asp.Net.Controllers
         }
 
         [HttpPost]
-        public ActionResult<AprendizModel> Post([FromBody] AprendizModel aprendizModel)
+        public ActionResult<MentorModel> Post([FromBody] MentorModel mentorModel)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace ChallangeDB1.Api.Asp.Net.Controllers
 
             try
             {
-                aprendizRepository.Inserir(aprendizModel);
+                mentorRepository.Inserir(mentorModel);
                 return NoContent();
             }
             catch (Exception e)
@@ -81,21 +81,21 @@ namespace ChallangeDB1.Api.Asp.Net.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<AprendizModel> Put([FromRoute] string id, [FromBody] AprendizModel aprendizModel)
+        public ActionResult<MentorModel> Put([FromRoute] string id, [FromBody] MentorModel mentorModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (aprendizModel.EmailAprendiz != id)
+            if (mentorModel.EmailMentor != id)
             {
                 return NotFound();
             }
 
             try
             {
-                aprendizRepository.Alterar(aprendizModel);
+                mentorRepository.Alterar(mentorModel);
                 return NoContent();
             }
             catch (Exception e)
@@ -105,12 +105,12 @@ namespace ChallangeDB1.Api.Asp.Net.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<AprendizModel> Delete([FromRoute] string id)
+        public ActionResult<MentorModel> Delete([FromRoute] string id)
         {
             try
             {
-                aprendizRepository.Excluir(id);
-               
+                mentorRepository.Excluir(id);
+
                 return NoContent();
             }
             catch (DbUpdateConcurrencyException e)

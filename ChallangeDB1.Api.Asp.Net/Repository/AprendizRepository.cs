@@ -12,6 +12,8 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
             dataBaseContext = ctx;
         }
 
+        //Métodos API
+
         public IList<AprendizModel> Listar() 
         {
             var lista = new List<AprendizModel>();
