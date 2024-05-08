@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ChallangeDB1.Api.Asp.Net.Models
 {
@@ -30,6 +31,8 @@ namespace ChallangeDB1.Api.Asp.Net.Models
 
         //Navigation properties
 
+        [JsonIgnore]
+        public IList<FormacaoAprendizModel>? FormacaoAprendiz { get; set; }
 
         //Construtores
 
