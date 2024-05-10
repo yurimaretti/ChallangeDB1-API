@@ -15,6 +15,10 @@ namespace ChallangeDB1.Api.Asp.Net.Repository.Context
 
         public DbSet<FormacaoMentorModel> FormacaoMentor { get; set; }
 
+        public DbSet<InteresseModel> Interesse { get; set; }
+
+        public DbSet<HabilidadeModel> Habilidade { get; set; }
+
         //Construtores
 
         public DataBaseContext(DbContextOptions options) : base(options)

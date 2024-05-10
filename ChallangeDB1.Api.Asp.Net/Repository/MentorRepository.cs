@@ -1,5 +1,6 @@
 ﻿using ChallangeDB1.Api.Asp.Net.Models;
 using ChallangeDB1.Api.Asp.Net.Repository.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChallangeDB1.Api.Asp.Net.Repository
 {
@@ -20,6 +21,8 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
             lista = dataBaseContext.
                 Mentor.
+                Include(f => f.FormacaoMentor).
+                Include(h => h.Habilidade).
                 ToList<MentorModel>();
 
             return lista;
@@ -27,9 +30,15 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
         public MentorModel Buscar(string id)
         {
-            var mentor = dataBaseContext.
+            var mentor = new MentorModel();
+
+            mentor = dataBaseContext.
                 Mentor.
-                Find(id);
+                Include(f => f.FormacaoMentor).
+                Where(f => f.EmailMentor == id).
+                Include(h => h.Habilidade)
+                .Where(h => h.EmailMentor == id)
+                .FirstOrDefault();
 
             return mentor;
         }

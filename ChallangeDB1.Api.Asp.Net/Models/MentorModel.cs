@@ -31,8 +31,9 @@ namespace ChallangeDB1.Api.Asp.Net.Models
 
         //Navigation properties
 
-        [JsonIgnore]
         public IList<FormacaoMentorModel>? FormacaoMentor { get; set; }
+
+        public IList<HabilidadeModel>? Habilidade { get; set; }
 
         //Construtores
 

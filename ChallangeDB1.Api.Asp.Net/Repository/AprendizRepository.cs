@@ -1,5 +1,6 @@
 ﻿using ChallangeDB1.Api.Asp.Net.Models;
 using ChallangeDB1.Api.Asp.Net.Repository.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChallangeDB1.Api.Asp.Net.Repository
 {
@@ -20,6 +21,8 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
             lista = dataBaseContext.
                 Aprendiz.
+                Include(f => f.FormacaoAprendiz).
+                Include(i => i.Interesse).
                 ToList<AprendizModel>();
 
             return lista;
@@ -27,9 +30,15 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
         public AprendizModel Buscar(string id) 
         {
-            var aprendiz = dataBaseContext.
+            var aprendiz = new AprendizModel();
+
+            aprendiz = dataBaseContext.
                 Aprendiz.
-                Find(id);
+                Include(f => f.FormacaoAprendiz).
+                Where(f => f.EmailAprendiz == id).
+                Include(i => i.Interesse).
+                Where(i => i.EmailAprendiz == id)
+                .FirstOrDefault();
 
             return aprendiz;
         }

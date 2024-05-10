@@ -31,8 +31,9 @@ namespace ChallangeDB1.Api.Asp.Net.Models
 
         //Navigation properties
 
-        [JsonIgnore]
         public IList<FormacaoAprendizModel>? FormacaoAprendiz { get; set; }
+
+        public IList<InteresseModel>? Interesse { get; set; }
 
         //Construtores
 
