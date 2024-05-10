@@ -15,16 +15,14 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
         //Métodos API
 
-        public IList<InteresseModel> ListarPorEmail(string email)
+        public InteresseModel ListarPorEmail(string email)
         {
-            var lista = new List<InteresseModel>();
-
-            lista = dataBaseContext.
-                Interesse
+            var interesse = dataBaseContext
+                .Interesse
                 .Where(e => e.EmailAprdz == email)
-                .ToList<InteresseModel>();
+                .FirstOrDefault();
 
-            return lista;
+            return interesse;
         }
 
         public InteresseModel BuscarPorId(int id)

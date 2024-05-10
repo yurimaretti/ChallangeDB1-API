@@ -14,16 +14,14 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
         //Métodos API
 
-        public IList<HabilidadeModel> ListarPorEmail(string email)
+        public HabilidadeModel ListarPorEmail(string email)
         {
-            var lista = new List<HabilidadeModel>();
-
-            lista = dataBaseContext.
-                Habilidade
+            var habilidade = dataBaseContext
+                .Habilidade
                 .Where(e => e.EmailMentor == email)
-                .ToList<HabilidadeModel>();
+                .FirstOrDefault();
 
-            return lista;
+            return habilidade;
         }
 
         public HabilidadeModel BuscarPorId(int id)
