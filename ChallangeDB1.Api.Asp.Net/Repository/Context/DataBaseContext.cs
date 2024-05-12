@@ -19,6 +19,8 @@ namespace ChallangeDB1.Api.Asp.Net.Repository.Context
 
         public DbSet<HabilidadeModel> Habilidade { get; set; }
 
+        public DbSet<MatchModel> Match { get; set; }
+
         //Construtores
 
         public DataBaseContext(DbContextOptions options) : base(options)

@@ -23,6 +23,7 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
                 Mentor.
                 Include(f => f.FormacaoMentor).
                 Include(h => h.Habilidade).
+                Include(m => m.Match).
                 ToList<MentorModel>();
 
             return lista;
@@ -36,9 +37,11 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
                 Mentor.
                 Include(f => f.FormacaoMentor).
                 Where(f => f.EmailMentor == id).
-                Include(h => h.Habilidade)
-                .Where(h => h.EmailMentor == id)
-                .FirstOrDefault();
+                Include(h => h.Habilidade).
+                Where(h => h.EmailMentor == id).
+                Include(m => m.Match).
+                Where(m => m.EmailMentor == id).
+                FirstOrDefault();
 
             return mentor;
         }

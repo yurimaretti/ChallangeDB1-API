@@ -15,7 +15,7 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
         //Métodos API
 
-        public IList<AprendizModel> Listar() 
+        public IList<AprendizModel> Listar()
         {
             var lista = new List<AprendizModel>();
 
@@ -23,6 +23,7 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
                 Aprendiz.
                 Include(f => f.FormacaoAprendiz).
                 Include(i => i.Interesse).
+                Include(m => m.Match).
                 ToList<AprendizModel>();
 
             return lista;
@@ -37,8 +38,10 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
                 Include(f => f.FormacaoAprendiz).
                 Where(f => f.EmailAprendiz == id).
                 Include(i => i.Interesse).
-                Where(i => i.EmailAprendiz == id)
-                .FirstOrDefault();
+                Where(i => i.EmailAprendiz == id).
+                Include(m => m.Match).
+                Where(m => m.EmailAprendiz == id).
+                FirstOrDefault();
 
             return aprendiz;
         }

@@ -35,6 +35,8 @@ namespace ChallangeDB1.Api.Asp.Net.Models
 
         public IList<HabilidadeModel>? Habilidade { get; set; }
 
+        public IList<MatchModel>? Match { get; set; }
+
         //Construtores
 
         public MentorModel()
