@@ -61,6 +61,28 @@ namespace ChallangeDB1.Api.Asp.Net.Controllers
             }
         }
 
+        [HttpGet("/match-aprendizes/{emailMentor}")]
+        public ActionResult<MentorModel> GetMentoresMatch([FromRoute] string emailMentor)
+        {
+            try
+            {
+                var mentorModel = mentorRepository.ListarAprendizesMatch(emailMentor);
+
+                if (mentorModel != null)
+                {
+                    return Ok(mentorModel);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.StackTrace);
+            }
+        }
+
         [HttpPost]
         public ActionResult<MentorModel> Post([FromBody] MentorModel mentorModel)
         {

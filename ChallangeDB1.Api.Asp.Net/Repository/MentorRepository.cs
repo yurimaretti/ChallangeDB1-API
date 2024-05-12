@@ -46,6 +46,30 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
             return mentor;
         }
 
+        public IList<AprendizModel> ListarAprendizesMatch(string emailMentor)
+        {
+            // Buscar os aprendizes que atendem aos critérios de curtida
+            var mentoresComMatches = dataBaseContext.Mentor
+                .Include(a => a.Match)
+                .Where(a => a.EmailMentor == emailMentor &&
+                            a.Match.Any(m => m.CurtidaAprendiz == 1 && m.CurtidaMentor == 1))
+                .ToList();
+
+            // Extrair os emails dos aprendizes dos mentores encontrados
+            var emailsAprendizes = mentoresComMatches
+                .SelectMany(a => a.Match.Where(m => m.CurtidaAprendiz == 1 && m.CurtidaMentor == 1)
+                                        .Select(m => m.EmailAprdz))
+                .Distinct()
+                .ToList();
+
+            // Buscar os aprendizes correspondentes aos emails encontrados
+            var aprendizes = dataBaseContext.Aprendiz
+                .Where(m => emailsAprendizes.Contains(m.EmailAprendiz))
+                .ToList();
+
+            return aprendizes;
+        }
+
         public void Inserir(MentorModel mentor)
         {
             dataBaseContext.Mentor.Add(mentor);
