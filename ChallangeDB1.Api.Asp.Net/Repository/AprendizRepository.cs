@@ -47,6 +47,8 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
             // Buscar os mentores correspondentes aos emails encontrados
             var mentores = dataBaseContext.Mentor
+                .Include( f => f.FormacaoMentor)
+                .Include(h => h.Habilidade)
                 .Where(m => emailsMentores.Contains(m.EmailMentor))
                 .ToList();
 

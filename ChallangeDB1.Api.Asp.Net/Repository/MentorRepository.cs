@@ -64,6 +64,8 @@ namespace ChallangeDB1.Api.Asp.Net.Repository
 
             // Buscar os aprendizes correspondentes aos emails encontrados
             var aprendizes = dataBaseContext.Aprendiz
+                .Include(f => f.FormacaoAprendiz)
+                .Include(i => i.Interesse)
                 .Where(m => emailsAprendizes.Contains(m.EmailAprendiz))
                 .ToList();
 
